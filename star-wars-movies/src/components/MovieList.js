@@ -2,11 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import ImageLoader from '../images/download.svg'
 
 const StyledMovieListCont = styled.div`
     width: 80%;
     padding: 0 15px;
     margin: 0 auto;
+    // position: relative;
 
          @media (max-width: 1024px) {
             width: 94%;
@@ -31,6 +33,24 @@ const StyledMovieListCont = styled.div`
         @media (max-width: 575px) {
             width: 100%;
         }
+`;
+
+const StyledLoader = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 77vh;
+`;
+
+const StyledLoaderImage = styled.img`
+    filter: invert(91%) sepia(41%) saturate(2104%) hue-rotate(334deg) brightness(104%) contrast(102%);
+    width: 80px;
+    animation: rotate 5s linear infinite;
+
+    @keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
 `;
 
 const StyledMovieList = styled.div`
@@ -172,8 +192,10 @@ const StyledMovieInfoMoreInfo = styled.div`
 `;
   
 
+
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const formatDate = (dateStr) => {
         const date = new Date(dateStr);
@@ -187,11 +209,28 @@ const MovieList = () => {
             })
             .catch(error => {
                 console.log(error);
-            });
+            })
+            .finally(() => setLoading(false));
     }, []);
+
+    // useEffect(() => {
+    //     axios.get('https://swapi.dev/api/films')
+    //         .then(response => {
+    //             setMovies(response.data.results);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         });
+    //         .finally(() => setLoading(false));
+    // }, []);
 
     return (
         <StyledMovieListCont>
+            {loading && (
+                <StyledLoader>
+                    <StyledLoaderImage src={ImageLoader} alt="Loading..." />
+                </StyledLoader>
+            )}
             <StyledMovieList>
                 {movies.map(movie => (
                     <StyledMovieCardCont key={movie.episode_id}>
@@ -202,7 +241,6 @@ const MovieList = () => {
                                 </StyledMovieTitle>
                                 <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
                             </StyledMovieTitleDate>
-
                             <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
 
                             <StyledMovieInfoMoreInfo>
@@ -214,11 +252,65 @@ const MovieList = () => {
             </StyledMovieList>
         </StyledMovieListCont>
     );
+
+    // return (
+    //     <StyledMovieListCont>
+    //         {loading && (
+    //             <StyledLoader>
+    //                 <StyledLoaderImage src="/path/to/loader.gif" alt="Loading..." />
+    //             </StyledLoader>
+    //             // <StyledLoadingImg src={ImageLoader} alt="Loading..." />)}
+    //         {!loading && (
+    //             <StyledMovieList>
+    //                 {movies.map(movie => (
+    //                     <StyledMovieCardCont key={movie.episode_id}>
+    //                         <StyledMovieCard>
+    //                             <StyledMovieTitleDate>
+    //                                 <StyledMovieTitle>
+    //                                     <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
+    //                                 </StyledMovieTitle>
+    //                                 <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
+    //                             </StyledMovieTitleDate>
+
+    //                             <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
+
+    //                             <StyledMovieInfoMoreInfo>
+    //                                 More info
+    //                             </StyledMovieInfoMoreInfo>
+    //                         </StyledMovieCard>
+    //                     </StyledMovieCardCont>
+    //                 ))}
+    //             </StyledMovieList>
+    //         )}
+    //     </StyledMovieListCont>
+    // );
+
+    // return (
+    //     <StyledMovieListCont>
+    //         <StyledMovieList>
+    //             {movies.map(movie => (
+    //                 <StyledMovieCardCont key={movie.episode_id}>
+    //                     <StyledMovieCard>
+    //                         <StyledMovieTitleDate>
+    //                             <StyledMovieTitle>
+    //                                 <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
+    //                             </StyledMovieTitle>
+    //                             <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
+    //                         </StyledMovieTitleDate>
+
+    //                         <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
+
+    //                         <StyledMovieInfoMoreInfo>
+    //                             More info
+    //                         </StyledMovieInfoMoreInfo>
+    //                     </StyledMovieCard>
+    //                 </StyledMovieCardCont>
+    //             ))}
+    //         </StyledMovieList>
+    //     </StyledMovieListCont>
+    // );
 };
 
 export default MovieList;
-
-
-
 
 
