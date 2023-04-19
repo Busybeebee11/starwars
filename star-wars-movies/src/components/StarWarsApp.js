@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderSection from './HeaderSection';
-import MovileList from './MovileList'
+import MovieList from './MovieList'
 import styled from 'styled-components';
 
 const StyledContainer = styled.div`
@@ -16,7 +16,7 @@ const StarWarsApp = () => {
     return (
         <StyledContainer>
             <HeaderSection />
-           <MovileList />
+            <MovieList />
         </StyledContainer>
   )
 }
