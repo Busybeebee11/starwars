@@ -153,11 +153,13 @@ const StyledMovieInfo = styled.p`
         }
 `;
 
-const StyledMovieInfoMoreInfo = styled.p`
+const StyledMovieInfoMoreInfoCont = styled.div`
     padding-top: 1.2rem;
     font-size: 0.875rem;
     text-transform: capitalize;
-    border-top: 2px solid rgb(142, 46, 46);
+    border-top: 2px solid rgb(142, 46, 46); 
+    color: rgb(255, 232, 31);
+    cursor: pointer;
 
     @media (max-width: 768px) {
         padding-top: 10px;
@@ -168,11 +170,7 @@ const StyledMovieInfoMoreInfo = styled.p`
        padding-top: 9px;
     }
 `;
-
-const StyledMovieInfoMoreInfo2 = styled.a`
-    color: rgb(255, 232, 31);
-    text-decoration: none;
-`;
+  
 
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
@@ -207,9 +205,9 @@ const MovieList = () => {
 
                             <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
 
-                            <StyledMovieInfoMoreInfo>
-                                <StyledMovieInfoMoreInfo2 href={movie.url}>More info</StyledMovieInfoMoreInfo2>
-                            </StyledMovieInfoMoreInfo>
+                            <StyledMovieInfoMoreInfoCont>
+                                More info
+                            </StyledMovieInfoMoreInfoCont>
                         </StyledMovieCard>
                     </StyledMovieCardCont>
                 ))}
