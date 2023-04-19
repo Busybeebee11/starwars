@@ -153,7 +153,7 @@ const StyledMovieInfo = styled.p`
         }
 `;
 
-const StyledMovieInfoMoreInfoCont = styled.div`
+const StyledMovieInfoMoreInfo = styled.div`
     padding-top: 1.2rem;
     font-size: 0.875rem;
     text-transform: capitalize;
@@ -205,9 +205,9 @@ const MovieList = () => {
 
                             <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
 
-                            <StyledMovieInfoMoreInfoCont>
+                            <StyledMovieInfoMoreInfo>
                                 More info
-                            </StyledMovieInfoMoreInfoCont>
+                            </StyledMovieInfoMoreInfo>
                         </StyledMovieCard>
                     </StyledMovieCardCont>
                 ))}
