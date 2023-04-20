@@ -2,13 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+// image loader
 import ImageLoader from '../images/download.svg'
+// card background images
+import bgCard1 from '../images/bg-card-1.png';
+import bgCard2 from '../images/bg-card-2.png';
+import bgCard3 from '../images/bg-card-3.png';
+import bgCard4 from '../images/bg-card-4.png';
+import bgCard5 from '../images/bg-card-5.png';
+import bgCard6 from '../images/bg-card-6.png';
 
 const StyledMovieListCont = styled.div`
     width: 80%;
     padding: 0 15px;
     margin: 0 auto;
-    // position: relative;
 
          @media (max-width: 1024px) {
             width: 94%;
@@ -191,8 +198,6 @@ const StyledMovieInfoMoreInfo = styled.div`
     }
 `;
   
-
-
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -213,16 +218,8 @@ const MovieList = () => {
             .finally(() => setLoading(false));
     }, []);
 
-    // useEffect(() => {
-    //     axios.get('https://swapi.dev/api/films')
-    //         .then(response => {
-    //             setMovies(response.data.results);
-    //         })
-    //         .catch(error => {
-    //             console.log(error);
-    //         });
-    //         .finally(() => setLoading(false));
-    // }, []);
+    // Create an array of the images
+    const bgImages = [bgCard1, bgCard2, bgCard3, bgCard4, bgCard5, bgCard6];
 
     return (
         <StyledMovieListCont>
@@ -232,9 +229,9 @@ const MovieList = () => {
                 </StyledLoader>
             )}
             <StyledMovieList>
-                {movies.map(movie => (
+                {movies.map((movie, index) => (
                     <StyledMovieCardCont key={movie.episode_id}>
-                        <StyledMovieCard>
+                        <StyledMovieCard style={{ backgroundImage: `url(${bgImages[index]})` }}>
                             <StyledMovieTitleDate>
                                 <StyledMovieTitle>
                                     <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
@@ -257,36 +254,9 @@ const MovieList = () => {
     //     <StyledMovieListCont>
     //         {loading && (
     //             <StyledLoader>
-    //                 <StyledLoaderImage src="/path/to/loader.gif" alt="Loading..." />
+    //                 <StyledLoaderImage src={ImageLoader} alt="Loading..." />
     //             </StyledLoader>
-    //             // <StyledLoadingImg src={ImageLoader} alt="Loading..." />)}
-    //         {!loading && (
-    //             <StyledMovieList>
-    //                 {movies.map(movie => (
-    //                     <StyledMovieCardCont key={movie.episode_id}>
-    //                         <StyledMovieCard>
-    //                             <StyledMovieTitleDate>
-    //                                 <StyledMovieTitle>
-    //                                     <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
-    //                                 </StyledMovieTitle>
-    //                                 <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
-    //                             </StyledMovieTitleDate>
-
-    //                             <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
-
-    //                             <StyledMovieInfoMoreInfo>
-    //                                 More info
-    //                             </StyledMovieInfoMoreInfo>
-    //                         </StyledMovieCard>
-    //                     </StyledMovieCardCont>
-    //                 ))}
-    //             </StyledMovieList>
     //         )}
-    //     </StyledMovieListCont>
-    // );
-
-    // return (
-    //     <StyledMovieListCont>
     //         <StyledMovieList>
     //             {movies.map(movie => (
     //                 <StyledMovieCardCont key={movie.episode_id}>
@@ -297,7 +267,6 @@ const MovieList = () => {
     //                             </StyledMovieTitle>
     //                             <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
     //                         </StyledMovieTitleDate>
-
     //                         <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
 
     //                         <StyledMovieInfoMoreInfo>
