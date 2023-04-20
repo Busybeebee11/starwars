@@ -249,35 +249,6 @@ const MovieList = () => {
             </StyledMovieList>
         </StyledMovieListCont>
     );
-
-    // return (
-    //     <StyledMovieListCont>
-    //         {loading && (
-    //             <StyledLoader>
-    //                 <StyledLoaderImage src={ImageLoader} alt="Loading..." />
-    //             </StyledLoader>
-    //         )}
-    //         <StyledMovieList>
-    //             {movies.map(movie => (
-    //                 <StyledMovieCardCont key={movie.episode_id}>
-    //                     <StyledMovieCard>
-    //                         <StyledMovieTitleDate>
-    //                             <StyledMovieTitle>
-    //                                 <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
-    //                             </StyledMovieTitle>
-    //                             <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
-    //                         </StyledMovieTitleDate>
-    //                         <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
-
-    //                         <StyledMovieInfoMoreInfo>
-    //                             More info
-    //                         </StyledMovieInfoMoreInfo>
-    //                     </StyledMovieCard>
-    //                 </StyledMovieCardCont>
-    //             ))}
-    //         </StyledMovieList>
-    //     </StyledMovieListCont>
-    // );
 };
 
 export default MovieList;
