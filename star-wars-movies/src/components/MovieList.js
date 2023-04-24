@@ -145,8 +145,6 @@ const StyledMovieInfo = styled.p`
     -webkit-line-clamp: 7; /* specify the number of lines */
     -webkit-box-orient: vertical;
     overflow: hidden;
-    // text-overflow: ellipsis;
-    // overflow-wrap: break-word;
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 25px;
