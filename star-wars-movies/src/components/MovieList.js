@@ -141,40 +141,28 @@ const StyledMovieDate = styled.span`
 `;
 
 const StyledMovieInfo = styled.p`
-    display: -webkit-box;
-    -webkit-line-clamp: 7; /* specify the number of lines */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+// style used first before creating a substring - removed all media queries for webkit clamp
+//     display: -webkit-box;
+//     -webkit-line-clamp: 7; /* specify the number of lines */
+//     -webkit-box-orient: vertical;
+//     overflow: hidden;
+
     font-size: 1rem;
     font-weight: 600;
     margin-bottom: 25px;
 
-        @media (max-width: 1024px) {
-            -webkit-line-clamp: 8;
-        }
-
         @media (max-width: 768px) {
             font-size: 14.3px;
-            -webkit-line-clamp: 7;
             margin-bottom: 22.5px;
         }
 
-        @media (max-width: 767px) {
-            -webkit-line-clamp: 4;
-        }
-
         @media (max-width: 575px) {
-            font-size: 12.8px;
-            -webkit-line-clamp: 3;
+            font-size: 12.4px;
             margin-bottom: 20px;
         }
-
-        @media (max-width: 375px) {;
-            -webkit-line-clamp: 5;
-        }
-
+        
         @media (max-width: 320px) {;
-            -webkit-line-clamp: 7;
+            font-size: 12px;
         }
 `;
 
@@ -219,6 +207,9 @@ const MovieList = () => {
     // Create an array of the images
     const bgImages = [bgCard1, bgCard2, bgCard3, bgCard4, bgCard5, bgCard6];
 
+    // Length of crawl
+    const MAX_CRAWL_LENGTH = 260;
+
     return (
         <StyledMovieListCont>
             {loading && (
@@ -236,7 +227,8 @@ const MovieList = () => {
                                 </StyledMovieTitle>
                                 <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
                             </StyledMovieTitleDate>
-                            <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo>
+                            <StyledMovieInfo>{movie.opening_crawl.substring(0, MAX_CRAWL_LENGTH)}...</StyledMovieInfo>
+                            {/* <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo> */}
 
                             <StyledMovieInfoMoreInfo>
                                 More info
