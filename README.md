@@ -1,5 +1,6 @@
 ### Assignment on
-- React network and events
+- Styling in React
+- Nnetwork and events
 
 ### Problem
 The App Development company you work with was recently awarded a contract to build applications for the Star Wars franchise.
@@ -27,6 +28,8 @@ On completing the implementation, create a pull request (PR) pointing your worki
 Get your mentor’s GitHub username and add him/her/them as your reviewer.
 
 #### What to submit 
-Submit the PR link
-Host your work on Netlify/Github Pages and submit the hosted link
+- Submit the PR link
+    - https://github.com/Busybeebee11/starwars/tree/star-wars
+- Host your work on Netlify/Github Pages and submit the hosted link
+    - https://starwars-movies-app.netlify.app/
 
