@@ -226,7 +226,6 @@ const MovieList = () => {
                 {movies.map((movie, index) => (
                     <StyledMovieCardCont key={movie.episode_id}>
                             <StyledMovieCard style={{ backgroundImage: `url(${bgImages[index]})` }}>
-                            {/* <StyledMovieCard style={{ backgroundImage: `url(${bgImages[movie.episode_id]})` }}> */}
                                 <StyledMovieTitleDate>
                                     <StyledMovieTitle>
                                         <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
@@ -236,7 +235,7 @@ const MovieList = () => {
                                 <StyledMovieInfo>{movie.opening_crawl.substring(0, MAX_CRAWL_LENGTH)}...</StyledMovieInfo>
 
                                 <StyledMovieInfoMoreInfo>
-                                    <StyledLink to={`/movie/${movie.episode_id}`}>More info</StyledLink>
+                                <StyledLink to={`/movie/${encodeURIComponent(movie.url)}`}>More info</StyledLink>
                                 </StyledMovieInfoMoreInfo>
                             </StyledMovieCard>
                     </StyledMovieCardCont>
@@ -249,3 +248,60 @@ const MovieList = () => {
 export default MovieList;
 
 
+
+// episode id used to render card details
+// const MovieList = () => {
+//     const [movies, setMovies] = useState([]);
+//     const [loading, setLoading] = useState(true);
+
+//     const formatDate = (dateStr) => {
+//         const date = new Date(dateStr);
+//         return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+//     };
+
+//     useEffect(() => {
+//         axios.get('https://swapi.dev/api/films')
+//             .then(response => {
+//                 setMovies(response.data.results);
+//             })
+//             .catch(error => {
+//                 console.log(error);
+//             })
+//             .finally(() => setLoading(false));
+//     }, []);
+
+//     // Create an array of the images
+//     const bgImages = [bgCard1, bgCard2, bgCard3, bgCard4, bgCard5, bgCard6];
+
+//     // Length of crawl
+//     const MAX_CRAWL_LENGTH = 260;
+
+//     return (
+//         <StyledMovieListCont>
+//             {loading && (
+//                 <StyledLoader>
+//                     <StyledLoaderImage src={ImageLoader} alt="Loading..." />
+//                 </StyledLoader>
+//             )}
+//             <StyledMovieList>
+//                 {movies.map((movie, index) => (
+//                     <StyledMovieCardCont key={movie.episode_id}>
+//                         {/* <StyledMovieCard style={{ backgroundImage: `url(${bgImages[movie.episode_id]})` }}> */}
+//                             <StyledMovieTitleDate>
+//                                 <StyledMovieTitle>
+//                                     <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
+//                                 </StyledMovieTitle>
+//                                 <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
+//                             </StyledMovieTitleDate>
+//                             <StyledMovieInfo>{movie.opening_crawl.substring(0, MAX_CRAWL_LENGTH)}...</StyledMovieInfo>
+
+//                             <StyledMovieInfoMoreInfo>
+//                                 {/* <StyledLink to={`/movie/${movie.episode_id}`}>More info</StyledLink> */}
+//                             </StyledMovieInfoMoreInfo>
+//                         </StyledMovieCard>
+//                     </StyledMovieCardCont>
+//                 ))}
+//             </StyledMovieList>
+//         </StyledMovieListCont>
+//     );
+// };
