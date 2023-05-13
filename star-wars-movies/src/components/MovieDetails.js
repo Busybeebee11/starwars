@@ -42,10 +42,10 @@ const StyledLoaderImage = styled.img`
     width: 80px;
     animation: rotate 5s StyledMovieInfoListnear infinite;
 
-        @keyframes rotate {
-        100% {
-            transform: rotate(360deg);
-        }
+    @keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
 `;
 
 const StyledMovieDetails = styled.div`
@@ -189,15 +189,28 @@ const MovieDetails = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        axios.get(`https://swapi.dev/api/films/${id}`)
-            .then(response => {
+        axios
+            .get(id)
+            .then((response) => {
                 setMovie(response.data);
             })
-            .catch(error => {
+            .catch((error) => {
                 console.log(error);
             })
             .finally(() => setLoading(false));
     }, [id]);
+
+    // renders card info with episode id from api but not matching title
+    // useEffect(() => {
+    //     axios.get(`https://swapi.dev/api/films/${id}`)
+    //         .then(response => {
+    //             setMovie(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    //         .finally(() => setLoading(false));
+    // }, [id]);
 
     const goBack = () => {
         window.history.back();
@@ -264,11 +277,16 @@ const MovieDetailsSection = ({ heading, items }) => (
     </StyledMoreInfoSection>
 );
 
+export default MovieDetails
+
+
+// episode id used to render info
 // const MovieDetails = () => {
 //     const [movie, setMovie] = useState(null);
 //     const [loading, setLoading] = useState(true);
 //     const { id } = useParams();
 
+//     // renders card info with episode id from api but not matching title
 //     useEffect(() => {
 //         axios.get(`https://swapi.dev/api/films/${id}`)
 //             .then(response => {
@@ -306,10 +324,6 @@ const MovieDetailsSection = ({ heading, items }) => (
 //         }
 //     }, [movie]);
 
-//     const getEpisodeIndex = (episodeId) => {
-//         return episodeId - 4;
-//     }
-
 //     return (
 //         <StyledMovieDetailsCont>
 //             {!movie && loading && <StyledLoader><StyledLoaderImage src={ImageLoader} alt="Loading..." /></StyledLoader>}
@@ -330,7 +344,7 @@ const MovieDetailsSection = ({ heading, items }) => (
 //                     <MovieDetailsSection heading="Characters" items={characters} />
 //                     <MovieDetailsSection heading="Planets" items={planets} />
 //                     <MovieDetailsSection heading="Starships" items={starships} />
-//                     <MovieDetailsSection heading="Vehicles" items={vehicles} episodeIndexFunction={getEpisodeIndex} />
+//                     <MovieDetailsSection heading="Vehicles" items={vehicles} />
 //                     {/* <MovieDetailsSection heading="Species" items={species} /> */}
 //                 </StyledMovieDetails>
 //             )}
@@ -338,19 +352,13 @@ const MovieDetailsSection = ({ heading, items }) => (
 //     );
 // };
 
-// const MovieDetailsSection = ({ heading, items, episodeIndexFunction }) => (
+// const MovieDetailsSection = ({ heading, items }) => (
 //     <StyledMoreInfoSection>
 //         <StyledMovieInfoHeading>{heading}</StyledMovieInfoHeading>
 //         <StyledMovieInfoUl>
 //             {items.map((name, index) => (
-//                 <StyledMovieInfoList key={index} data-episode-id={index + 4}>
-//                     {name}
-//                     {episodeIndexFunction && <span style={{ display: "none" }}>{episodeIndexFunction(index + 4)}</span>}
-//                 </StyledMovieInfoList>
+//                 <StyledMovieInfoList key={index}>{name}</StyledMovieInfoList>
 //             ))}
 //         </StyledMovieInfoUl>
 //     </StyledMoreInfoSection>
 // );
-
-export default MovieDetails
-
