@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 // image loader
 import ImageLoader from '../images/download.svg'
 // card background images
@@ -17,7 +18,7 @@ const StyledMovieListCont = styled.div`
     padding: 0 15px;
     margin: 0 auto;
 
-         @media (max-width: 1024px) {
+        @media (max-width: 1024px) {
             width: 94%;
         }
 
@@ -109,21 +110,21 @@ const StyledMovieTitle = styled.h3`
     font-weight: 700;
     letter-spacing: 2px;
 
-    @media (max-width: 1024px) {
-        font-size: 18px;
-    }
+        @media (max-width: 1024px) {
+            font-size: 18px;
+        }
 
-    @media (max-width: 767px) {
-        font-size: 19px;
-    }
+        @media (max-width: 767px) {
+            font-size: 19px;
+        }
 
-    @media (max-width: 600px) {
-        font-size: 19.8px;
-    }
+        @media (max-width: 600px) {
+            font-size: 19.8px;
+        }
 
-    @media (max-width: 575px) {
-        font-size: 17px;
-    }
+        @media (max-width: 575px) {
+            font-size: 17px;
+        }
 `;
 
 const StyledMovieTitle2 = styled.a`
@@ -135,9 +136,9 @@ const StyledMovieDate = styled.span`
     color: rgb(157, 157, 157);
     font-size: 0.875rem;
 
-    @media (max-width: 768px) {
-        font-size: 12.6px;
-    }
+        @media (max-width: 768px) {
+            font-size: 12.6px;
+        }
 `;
 
 const StyledMovieInfo = styled.p`
@@ -168,21 +169,25 @@ const StyledMovieInfo = styled.p`
 
 const StyledMovieInfoMoreInfo = styled.div`
     padding-top: 1.2rem;
-    font-size: 0.875rem;
-    text-transform: capitalize;
     border-top: 2px solid rgb(142, 46, 46); 
-    color: rgb(255, 232, 31);
-    cursor: pointer;
 
-    @media (max-width: 768px) {
-        padding-top: 10px;
-    }
+        @media (max-width: 768px) {
+            padding-top: 10px;
+        }
 
-    @media (max-width: 767px) {
-       font-size: 11.2px;
-       padding-top: 9px;
-    }
+        @media (max-width: 767px) {
+        font-size: 11.2px;
+        padding-top: 9px;
+        }
 `;
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: rgb(255, 232, 31);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: capitalize;
+`
   
 const MovieList = () => {
     const [movies, setMovies] = useState([]);
@@ -220,20 +225,20 @@ const MovieList = () => {
             <StyledMovieList>
                 {movies.map((movie, index) => (
                     <StyledMovieCardCont key={movie.episode_id}>
-                        <StyledMovieCard style={{ backgroundImage: `url(${bgImages[index]})` }}>
-                            <StyledMovieTitleDate>
-                                <StyledMovieTitle>
-                                    <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
-                                </StyledMovieTitle>
-                                <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
-                            </StyledMovieTitleDate>
-                            <StyledMovieInfo>{movie.opening_crawl.substring(0, MAX_CRAWL_LENGTH)}...</StyledMovieInfo>
-                            {/* <StyledMovieInfo>{movie.opening_crawl}</StyledMovieInfo> */}
+                            <StyledMovieCard style={{ backgroundImage: `url(${bgImages[index]})` }}>
+                            {/* <StyledMovieCard style={{ backgroundImage: `url(${bgImages[movie.episode_id]})` }}> */}
+                                <StyledMovieTitleDate>
+                                    <StyledMovieTitle>
+                                        <StyledMovieTitle2 href={movie.url}>{movie.title}</StyledMovieTitle2>
+                                    </StyledMovieTitle>
+                                    <StyledMovieDate>{formatDate(movie.release_date)}</StyledMovieDate>
+                                </StyledMovieTitleDate>
+                                <StyledMovieInfo>{movie.opening_crawl.substring(0, MAX_CRAWL_LENGTH)}...</StyledMovieInfo>
 
-                            <StyledMovieInfoMoreInfo>
-                                More info
-                            </StyledMovieInfoMoreInfo>
-                        </StyledMovieCard>
+                                <StyledMovieInfoMoreInfo>
+                                    <StyledLink to={`/movie/${movie.episode_id}`}>More info</StyledLink>
+                                </StyledMovieInfoMoreInfo>
+                            </StyledMovieCard>
                     </StyledMovieCardCont>
                 ))}
             </StyledMovieList>
